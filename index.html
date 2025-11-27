@@ -624,7 +624,7 @@
       document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
         const data = urlParams.get('data') || ""; // 沒有 data 時就給空字串
-        document.getElementById('InputRoom').value = data;
+        document.getElementById('InputRoom').value = decodeURIComponent(data);
 
         const event = new Event('input', { bubbles: true });
         document.getElementById('InputRoom').dispatchEvent(event);
