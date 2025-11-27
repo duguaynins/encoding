@@ -119,7 +119,7 @@
     }
     .main {
         border: 2px solid red;
-        padding: 8px;
+        /*padding: 8px;*/
         /**animation: blinkBorder 1s infinite;  //===*/
         /* 呼吸式動畫：平滑過渡 */
         /**animation: blinkBorder 1s ease-in-out infinite;  //===*/
@@ -217,7 +217,7 @@
           
           <div class="CONTENT" style="background: #FFFFFF; overflow:auto; width:100%; flex:1; border: 1px solid #ccc; position: relative;">
               <!--img id="linkCode" onclick="openLink()" alt='QR Code' style="width:100%;"-->
-              <input id="code-bgcolor" type="color" value="#FFFFFF" style="width:100%; height:9vh;">
+              <input class="main" id="code-bgcolor" type="color" value="#FFFFFF" style="width:100%; height:9vh;">
               <!--button id="code-dl" style="width:100%; height:9vh;">💾</button-->
 
               <div id="code-result" style="
@@ -280,7 +280,7 @@
           </div>
             
           
-          <input class="main" id="InputRoom" type="text" name="noMemory" autocomplete="off" placeholder="input content and get barcode" style="width:100%; text-align: center;"/>
+          <input class="main" id="InputRoom" type="text" name="noMemory" autocomplete="off" placeholder="input content and get barcode" style="width:100%; text-align: center; padding: 8px;"/>
             
           <!--strong></strong-->
           <div style="background: #FF3B00; color: white;" translate="yes">
