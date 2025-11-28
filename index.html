@@ -217,7 +217,7 @@
           
           <div class="CONTENT" style="background: #FFFFFF; overflow:auto; width:100%; flex:1; border: 1px solid #ccc; position: relative;">
               <!--img id="linkCode" onclick="openLink()" alt='QR Code' style="width:100%;"-->
-              <input class="main" id="code-bgcolor" type="color" value="#FFFFFF" style="width:100%; height:9vh; padding: 0px;">
+              <input class="main" id="code-bgcolor" type="color" value="#FFFFFF" style="width:100%; height:9vh; padding: 0px; display: none;">
               <!--button id="code-dl" style="width:100%; height:9vh;">💾</button-->
 
               <div id="code-result" style="
@@ -235,7 +235,11 @@
 
                     " /></canvas><br>
               </div>
-              <div style="background: #FFFFFF; color: black; display: block;">
+              <div style="background: #FFFFFF; color: black; display: none;">
+                  <p>Click the preview image to enlarge!</p>
+                  <p>Click the full image to download!</p>
+              </div>
+              <div style="background: #FFFFFF; color: black; display: none;">
                   <p>🔺🔺🔺</p>
                   <p>You can generate a barcode and test the background.</p>
                   <!--p>You can choose the background color of the barcode.</p-->
