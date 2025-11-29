@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head translate="yes">
@@ -162,6 +163,7 @@
       display: none;
       flex-shrink: 0;        /* 防止被壓縮 */
       background-color: transparent;
+      background-color: "#CDCDCD";
     }
   </style>
 </head>
@@ -217,7 +219,8 @@
           
           <div class="CONTENT" style="background: #FFFFFF; overflow:auto; width:100%; flex:1; border: 1px solid #ccc; position: relative;">
               <!--img id="linkCode" onclick="openLink()" alt='QR Code' style="width:100%;"-->
-              <input class="main" id="code-bgcolor" type="color" value="#FFFFFF" style="width:100%; height:9vh; padding: 0px; display: none;">
+              <input class="main" id="code-color" type="color" value="#000000" style="width:100%; height:9vh; padding: 0px;">
+              <input class="main" id="code-bgcolor" type="color" value="#CDCDCD" style="width:100%; height:9vh; padding: 0px;">
               <!--button id="code-dl" style="width:100%; height:9vh;">💾</button-->
 
               <div id="code-result" style="
@@ -236,20 +239,18 @@
                     " /></canvas><br>
               </div>
               <div style="background: #FFFFFF; color: black; display: block;">
-                  <p>Click the preview image to enlarge!</p>
-                  <p>Click the full image to download!</p>
-                  <p>---------</p>
-                  <p>It only takes effect after entering the content!</p>
-                  <p>🔻🔻🔻</p>
-              </div>
-              <div style="background: #FFFFFF; color: black; display: none;">
                   <p>🔺🔺🔺</p>
-                  <p>You can generate a barcode and test the background.</p>
+                  <p>Can generate a barcode and preview its background.</p>
+                  <!--p>Can generate a barcode and test the background color.</p-->
                   <!--p>You can choose the background color of the barcode.</p-->
                   <!--p>You can select any color directly from it.</p-->
+                  <p>---------</p>
+                  <p style="color: red;">Click the small image to enlarge!</p>
+                  <p style="color: red;">Click the large image to download!</p>
                   <!--p>⚠️⚠️⚠️</p-->
                   <p>---------</p>
                   <p>It only takes effect after entering the content!</p>
+                  <p translate="no"> (PNG)</p>
                   <p>🔻🔻🔻</p>
               </div>
           </div>
@@ -399,11 +400,11 @@
                 text:        text,     // 條碼內容  // "Hello world!"
                 scale:       4,
                 alttext:     bcid,     // ✅ 替代顯示的文字
+                barcolor:    document.getElementById('code-color').value,  // 條碼顏色（紅色）
+                textcolor:   '000000'    // 文字顏色（藍色）
                 ///backgroundcolor: 'FFFFFF',  // 增加這行來設定白色底色
                 ///padding: 10, // 增加 10 像素的背景填充
-                
-                ///textcolor: '000000',
-                ///includetext: true,
+                ///includetext: true,  // 這行會導致錯誤
             });
             document.getElementById(bcid).style.margin = "1em 0";
             document.getElementById(bcid).style.display = "block";
@@ -414,12 +415,36 @@
     }
     
     // 等待 DOM 元素載入完成
-    /*
-    document.addEventListener('DOMContentLoaded', () => {
-      try {
-      } catch (e) {
-      }
-    });*/
+    
+    function gencodes(value) {
+        ///document.getElementById('linkCode').src = newSrc;
+        ///document.getElementById('linkCode').style.display = 'block';
+        
+        gencode(text=value, bcid="qrcode", format=/^.{0,1000}$/)
+        gencode(text=value, bcid="datamatrix", format=/^.{0,2000}$/)
+        gencode(text=value, bcid="pdf417", format=/^.{0,1800}$/)
+        gencode(text=value, bcid="azteccode", format=/^.{0,3000}$/)
+        gencode(text=value, bcid="maxicode", format=/^$/)
+        ///gencode(text=value, bcid="maxicode", format=/^[\x20-\x7E]{1,93}$/)
+        
+        gencode(text=value, bcid="ean13", format=/^\d{12}$/)
+        gencode(text=value, bcid="ean8", format=/^\d{7}$/)
+        gencode(text=value, bcid="upca", format=/^\d{11}$/)
+        gencode(text=value, bcid="code128", format=/^[\x00-\x7F]+$/)
+        gencode(text=value, bcid="code39", format=/^[A-Z0-9\-\.\$\/\+\% ]+$/)
+        gencode(text=value, bcid="itf14", format=/^\d{13}$/)
+        gencode(text=value, bcid="codabar", format=/^[ABCD][0-9\-\$:\/\.]+[ABCD]$/)
+        gencode(text=value, bcid="msi", format=/^\d+$/)
+
+        
+        document.querySelectorAll("canvas").forEach(canvas => {
+            canvas.style.background = document.getElementById('code-bgcolor').value;
+        });
+            
+        ///gencode_ean13(value);
+        ///gencode_datamatrix(value);
+        ///gencode_qrcode(value);
+    }
   </script>
   
   
@@ -430,46 +455,37 @@
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
 
     <script>  // main.js
-      /*
+      /*  
       document.getElementById('InputRoom').addEventListener("change", () => {
+          // 備用的生成條碼方案
           const value = encodeURIComponent(document.getElementById('InputRoom').value);
           const newSrc = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${value}`;
           if (value.trim() === "") { canvas.style.display = "none"; }
-      });*/
+      }); */
+
+      let debounceTimer;
+      
+      document.getElementById('code-bgcolor').addEventListener('input', () => {
+          // 已經移動至方法內部 gencodes()
+          document.querySelectorAll("canvas").forEach(canvas => {
+              canvas.style.background = document.getElementById('code-bgcolor').value;
+          });
+      });
+      document.getElementById('code-color').addEventListener('input', () => {
+          const value = document.getElementById('InputRoom').value;
+          if (value.trim() === "") { 
+            ///...
+          } else { gencodes(value); }
+      });
       document.getElementById('InputRoom').addEventListener('input', () => {
-          const value = document.getElementById('InputRoom').value;  // 未經過編碼 encodeURIComponent()
-          ///const value = encodeURIComponent(document.getElementById('InputRoom').value);  // 經過編碼
-          const newSrc = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${value}`;
+          const value = document.getElementById('InputRoom').value;  // 未經過編碼 =>> encodeURIComponent()
+          ///const value = encodeURIComponent(document.getElementById('InputRoom').value);  // 經過編碼 =>> encodeURIComponent()
 
           if (value.trim() === "") { 
             document.querySelectorAll("canvas").forEach(c => {
               c.style.display = "none";
             });
-
-          }
-
-          ///document.getElementById('linkCode').src = newSrc;
-          ///document.getElementById('linkCode').style.display = 'block';
-          
-          gencode(text=value, bcid="qrcode", format=/^.{0,1000}$/)
-          gencode(text=value, bcid="datamatrix", format=/^.{0,2000}$/)
-          gencode(text=value, bcid="pdf417", format=/^.{0,1800}$/)
-          gencode(text=value, bcid="azteccode", format=/^.{0,3000}$/)
-          gencode(text=value, bcid="maxicode", format=/^$/)
-          ///gencode(text=value, bcid="maxicode", format=/^[\x20-\x7E]{1,93}$/)
-          
-          gencode(text=value, bcid="ean13", format=/^\d{12}$/)
-          gencode(text=value, bcid="ean8", format=/^\d{7}$/)
-          gencode(text=value, bcid="upca", format=/^\d{11}$/)
-          gencode(text=value, bcid="code128", format=/^[\x00-\x7F]+$/)
-          gencode(text=value, bcid="code39", format=/^[A-Z0-9\-\.\$\/\+\% ]+$/)
-          gencode(text=value, bcid="itf14", format=/^\d{13}$/)
-          gencode(text=value, bcid="codabar", format=/^[ABCD][0-9\-\$:\/\.]+[ABCD]$/)
-          gencode(text=value, bcid="msi", format=/^\d+$/)
-              
-          ///gencode_ean13(value);
-          ///gencode_datamatrix(value);
-          ///gencode_qrcode(value);
+          } else { gencodes(value); }
       });
       
       // 字體大小
