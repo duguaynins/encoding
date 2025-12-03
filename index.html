@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head translate="yes">
@@ -17,6 +18,13 @@
     </style>
   
   <style>
+    #content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;  /* 垂直置中 */
+        align-items: center;      /* 水平置中 */
+        text-align: center;       /* 文字置中 */
+    }
     input, textarea, button, select {
       /*font-size: inherit; /* 主動繼承 body 字體大小 */
       font-size: 18px;
@@ -217,7 +225,7 @@
           nins/encoding
           </div></div>
           
-          <div class="CONTENT" style="background: #FFFFFF; overflow:auto; width:100%; flex:1; border: 1px solid #ccc; position: relative;">
+          <div id="content" style="background: #FFFFFF; width: 100%; flex: 1; border: 1px solid #ccc; overflow:auto; position: relative;">
               <!--img id="linkCode" onclick="openLink()" alt='QR Code' style="width:100%;"-->
               <!--button id="code-dl" style="width:100%; height:9vh;">💾</button-->
 
@@ -237,19 +245,19 @@
                       margin: 1em 0;
                       display: none;
 
-                    " /></canvas><br>
+                    "></canvas><br>
               </div>
               <div style="background: #FFFFFF; color: black; display: block;">
                   <!--p>🔺🔺🔺</p-->
                   <!--p>---------</p-->
-                  <p>Can generate a barcode and preview its background.</p>
+                  <p><span translate="no">📌 </span>generate a barcode and preview its background.</p>
                   <!--p>Can generate a barcode and test the background color.</p-->
                   <!--p>You can choose the background color of the barcode.</p-->
                   <!--p>You can select any color directly from it.</p-->
-                  <p style="color: red;">Click the small image to enlarge!</p>
-                  <p style="color: red;">Click the large image to download!</p>
+                  <p style="color: red;"><span translate="no">💡 </span>Click the small image to enlarge!</p>
+                  <p style="color: red;"><span translate="no">💡 </span>Click the large image to download!</p>
                   <!--p>⚠️⚠️⚠️</p-->
-                  <p>It only takes effect after entering the content!</p>
+                  <p><span translate="no">⚠️ </span>It only takes effect after entering the content!</p>
                   <p translate="no"> (PNG)</p>
                   <p>🔻🔻🔻</p>
               </div>
