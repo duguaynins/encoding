@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head translate="yes">
@@ -10,6 +11,7 @@
     <!--link rel="icon" type="image/png" sizes="48x48" href="/favicon.png"-->
     <!--link rel="shortcut icon" href="/favicon.ico"-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link rel="canonical" href="https://copyright.nins.cc/">
     <title translate="no">nins/encoding</title>
     <style>
       body {
@@ -137,12 +139,12 @@
     }
     
     input:hover {
-      background-color: #cdcdcd;    ///FF3B00;
-      color: black;///gray;
+      background-color: #cdcdcd;
+      color: black;
     }
     input:active {
-      background-color: #222222;  ///#004080;
-      color: white;///gray;
+      background-color: #222222;
+      color: white;
     }
     input:focus {
       outline: none;              /* 移除預設藍色邊框 */
@@ -220,11 +222,12 @@
       display: flex;
       flex-direction: column;
     ">
-          <span style="background-color: black; color: white; font-size: max(1vh,1vw);">Enter content and get barcode.</span>
+          <strong id="anything" style="background-color: black; color: white; font-size: max(1vh,1vw);"><b translate="no">© nins. </b>Enter content and get barcode.</strong>
           <div style="background: #FFFFFF; color: black;" translate="no">
           <div style="margin: 10px;" onclick="document.getElementById('DialogShare').showModal()">
           nins/encoding
           </div></div>
+          
           
           <div id="content" style="background: #FFFFFF; width: 100%; flex: 1; border: 1px solid #ccc; overflow:auto; position: relative;">
               <!--img id="linkCode" onclick="openLink()" alt='QR Code' style="width:100%;"-->
@@ -248,30 +251,26 @@
 
                     "></canvas><br>
               </div>
+
               <div style="background: #FFFFFF; color: black; display: block;">
                   <h1 translate="no" style="margin: 0;">© 2024 NINS. 👻</h1>
                   <p translate="no" style="margin: 0; color: red;">(by JPGT)</p>
-                  <!--p>🔺🔺🔺</p-->
-                  <!--p>---------</p-->
-                  <p><span translate="no">📌 </span>generate a barcode and preview its background.</p>
-                  <!--p>Can generate a barcode and test the background color.</p-->
-                  <!--p>You can choose the background color of the barcode.</p-->
-                  <!--p>You can select any color directly from it.</p-->
-                  <p style="color: red;"><span translate="no">💡 </span>Click the small image to enlarge!</p>
-                  <p style="color: red;"><span translate="no">💡 </span>Click the large image to download!</p>
-                  <!--p>⚠️⚠️⚠️</p-->
-                  <p><span translate="no">⚠️ </span>It only takes effect after entering the content!</p>
-                  <p translate="no"> (PNG)</p>
-                  <p>🔻🔻🔻</p>
+                  <!--p>🔺🔺🔺</p!-->
+                  <!--p>---------</p!-->
+                  <!--p>⚠️💡📌</p!-->
+                  <!--p>---------</p!-->
+                  <!--p>🔻🔻🔻</p!-->
               </div>
           </div>
 
-          <div class="CONTENT">
+          <u translate="yes" style="text-decoration:none; color:black; background: #eee;">Click the small image = enlarge! Click the large image = download!<br>🔻🔻🔻</u>
+
+          <div class="main CONTENT">
               <div id="code-slider" style="
                   display: flex;
                   /*flex-direction: row;  /* 上下==column */
                   justify-content: flex-start;  /* 左對齊較符合滾動預期 center 不符合 */
-                  flex-shrink: 0
+                  flex-shrink: 0;
                   align-items: center;  /* 水平置中 canvas */
                   overflow-y: auto;     /* 可垂直滾動 */
                   overflow-x: auto;     /* 可水平滾動 */
@@ -314,7 +313,8 @@
               </div>
           </div>
             
-          
+          <u translate="yes" style="text-decoration:none; color:black; background: #eee;">generate a barcode and preview its background. It only takes effect after entering the content!<br>🔻🔻🔻</u>
+
           <input class="main" id="InputRoom" type="text" name="noMemory" autocomplete="off" placeholder="input content and get barcode" style="width:100%; text-align: center; padding: 8px;"/>
             
           <!--strong></strong-->
@@ -322,7 +322,7 @@
           <div style="margin: 10px;" onclick="document.getElementById('DialogTool').showModal()">
           By sending a message to this service, it means you have agreed to any content and all content!
           </div></div>
-          <span style="background-color: black; color: white; font-size: max(1vh,1vw);" translate="no">© 2024 NINS (by JPGT).</span>
+          <strong style="background-color: black; color: white; font-size: max(1vh,1vw);" translate="no">© 2024 NINS (by JPGT).</strong>
     </div>
 
     <script>
